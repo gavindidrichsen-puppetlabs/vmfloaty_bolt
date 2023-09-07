@@ -12,6 +12,7 @@ Assumes:
 * [direnv](https://direnv.net/docs/installation.html) is installed
 * [rbenv](https://github.com/rbenv/rbenv) is installed and configured.  Ensure that ``rbenv versions`` includes the version specified in the ``.ruby-version`` file; otherwise install it with ``rbenv install <version>``
 * [jq]() is installed.  This is an optional pre-requisite that formats json output and can be removed from the manual commands below if desired.
+* Private key ``~/.ssh/id_rsa-acceptance`` is present and valid, i.e., associated public sshkey is configured on target VMs.
 
 Note also:
 
@@ -22,9 +23,6 @@ Note also:
 The following must be performed before using bolt against the vmfloaty VMs:
 
 ```bash
-# ensure direnv configuration is present
-cp .envrc.sample .envrc
-
 # verify that the rbenv and ruby versions match
 rbenv version
 ruby --version
@@ -33,6 +31,7 @@ ruby --version
 bundle install
 
 # ensure BUNDLE_BIN directory (.direnv/bin) is on the local PATH
+cp .envrc.sample .envrc
 direnv allow # this only needs to be done once; thereafter, the environment will be loaded automatically
 
 # verify floaty on the local PATH: should return something like /User/../.direnv/bin/floaty
@@ -45,7 +44,7 @@ floaty get redhat-8-x86_64
 # verify existence of the VMs
 floaty list --active --json | jq '.'
  
-# save the floaty inventory and very contents
+# save the floaty inventory and verify inventory.json contents
 mkdir -p inventory.d/vmfloaty
 floaty list --active --json | jq '.' > inventory.d/vmfloaty/inventory.json 
 cat inventory.d/vmfloaty/inventory.json 
@@ -78,7 +77,7 @@ Bolt should now be available for use against the vmfloaty VMs.  For example the 
 
 #### Ruby not using the version specified in ``.ruby-version``
 
-If ``bundle install`` fails with an error something like below with ``...because current Ruby version is = 2.6.10...``, then the command line may not be picking up the ruby version defined by ``rbenv`` in the ``.ruby-version`` file of ``2.7.0``:
+If ``bundle install`` (or other ruby commands event ``floaty``) fails with an error something like below with ``...because current Ruby version is = 2.6.10...``, then the command line may not be picking up the ruby version defined by ``rbenv`` in the ``.ruby-version`` file of ``2.7.0``:
 
 ```bash
 ➜  vmfloaty_bolt git:(development) ✗ bundle install
