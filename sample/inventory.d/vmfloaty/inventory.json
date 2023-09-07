@@ -1,0 +1,26 @@
+{
+  "beguiling-pap": {
+    "template": "redhat-8-x86_64-pooled",
+    "lifetime": 12,
+    "running": 6.25,
+    "remaining": 5.75,
+    "start_time": "2023-09-07T15:52:55+00:00",
+    "end_time": "2023-09-08T03:52:55+00:00",
+    "state": "running",
+    "ip": "",
+    "fqdn": "beguiling-pap.delivery.puppetlabs.net",
+    "host": "pix-jj27-u22.ops.puppetlabs.net"
+  },
+  "wild-poignancy": {
+    "template": "redhat-8-x86_64-pooled",
+    "lifetime": 12,
+    "running": 3.46,
+    "remaining": 8.54,
+    "start_time": "2023-09-07T18:40:13+00:00",
+    "end_time": "2023-09-08T06:40:13+00:00",
+    "state": "running",
+    "ip": "",
+    "fqdn": "wild-poignancy.delivery.puppetlabs.net",
+    "host": "pix-jj29-u19.ops.puppetlabs.net"
+  }
+}

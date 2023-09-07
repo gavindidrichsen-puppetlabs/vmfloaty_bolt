@@ -1,0 +1,9 @@
+---
+name: vmfloaty
+modules: []
+plans:
+  - vmfloaty::*
+tasks:
+  - vmfloaty::*
+disable-warnings:
+  - project_shadows_module

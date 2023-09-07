@@ -1,0 +1,39 @@
+# This file can be used to customize the files managed by PDK.
+#
+# See https://github.com/puppetlabs/pdk-templates/blob/main/README.md
+# for more information.
+#
+# See https://github.com/puppetlabs/pdk-templates/blob/main/config_defaults.yml
+# for the default values.
+---
+appveyor.yml:
+  delete: true
+.bundle/config:
+  unmanaged: true
+.devcontainer/Dockerfile:
+  delete: true
+.devcontainer/README.md:
+  delete: true
+.devcontainer/devcontainer.json:
+  delete: true
+.gitignore:
+  paths:
+    - "bolt-debug.log"
+    - "*_cache*"
+    - ".direnv/"
+    - ".envrc.sample"
+    - "/inventory.d/"
+    - "inventory.ssh.yaml"
+    - "*.log"
+    - ".modules/"
+    - ".rerun.json"
+    - ".resource_types/"
+    - "*.sample"
+.gitlab-ci.yml:
+  delete: true
+.travis.yml:
+  delete: true
+.vscode/extensions.json:
+  delete: true
+.yardopts:
+  delete: true
