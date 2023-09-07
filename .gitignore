@@ -27,11 +27,9 @@
 bolt-debug.log
 *_cache*
 .direnv/
-.envrc.sample
 /inventory.d/
 inventory.ssh.yaml
 *.log
 .modules/
 .rerun.json
 .resource_types/
-*.sample
