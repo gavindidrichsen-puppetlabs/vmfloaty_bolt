@@ -1,9 +1,5 @@
 # Generate bolt inventory from vmfloaty
 
-## Outstanding
-
-* Codefy the selection, download, and verification of pdk release from jenkins build machine, i.e., <http://builds.delivery.puppetlabs.net/pdk/3.0.0.0/artifacts/el/8/products/x86_64/>
-
 ## Description
 
 This project illustrates how to generate a bolt inventory from a list of vmfloaty VMs.
