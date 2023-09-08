@@ -60,6 +60,8 @@ cat inventory.yaml
 
 ## Usage
 
+### Verify that bolt works as expected
+
 Bolt should now be available for use against the vmfloaty VMs.  For example the following simple commands should work as expected:
 
 ```bash
@@ -71,6 +73,59 @@ Bolt should now be available for use against the vmfloaty VMs.  For example the 
 
 # verify basic puppet code will apply on target
 /opt/puppetlabs/bin/bolt plan run vmfloaty::hello --targets=all --verbose
+```
+
+### Create a new bolt project
+
+```bash
+# create a new directory to test puppet code against your new inventory of vmfloaty VM's
+mkdir /tmp/peadm_test
+cd /tmp/peadm_test
+
+# initialize the bolt project
+/opt/puppetlabs/bin/bolt project init peadm_test
+
+# re-use the vmfloaty bolt inventory, i.e., sym link inventory.yaml => <vmfloaty_bolt directory>/inventory.yaml
+rm -f inventory.yaml  # remove the default inventory.yaml created by bolt project init
+ln -s <FULL_PATH>/vmfloaty_bolt/inventory.yaml inventory.yaml
+
+# verify inventory.yaml is valid: sym link ok? bolt inventory show working?
+ls -la
+/opt/puppetlabs/bin/bolt inventory show
+
+# add a module that you wish to use, e.g., puppetlabs-peadm as in
+➜  peadm_test cat bolt-project.yaml 
+---
+name: peadm_test
+modules:
+  - puppetlabs-peadm
+➜  peadm_test 
+
+# install the module and its dependencies
+/opt/puppetlabs/bin/bolt module install
+
+# notice the new plans that are now available, e.g., ``peadm::install``
+/opt/puppetlabs/bin/bolt plan show
+```
+
+If you want to continue using the ``pupppetlabs-peadm`` then continue on; otherwise stop and use your own choice of modules.
+
+Refer to the [peadm usage documentation](https://github.com/puppetlabs/puppetlabs-peadm/blob/main/documentation/install.md#usage);
+
+```bash
+# create a simple "standard" primary only using the peadm, e.g.,
+➜  peadm_test cat params.json 
+{
+  "primary_host": "<ONE OF THE VMFLOATY HOSTNAMES>",
+
+  "console_password": "<SOME_PASSWORD>",
+  "dns_alt_names": [ "puppet", "puppet.lab1.puppet.vm", "rangy-tremor.delivery.puppetlabs.net" ],
+  "version": "2021.7.4"
+}
+➜  peadm_test 
+
+# install the primary
+/opt/puppetlabs/bin/bolt plan run peadm::install --inventory inventory.yaml --modulepath ~/modules --params @params.json
 ```
 
 ## Appendix
