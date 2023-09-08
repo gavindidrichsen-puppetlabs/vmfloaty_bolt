@@ -4,6 +4,8 @@
 
 This project illustrates how to generate a bolt inventory from a list of vmfloaty VMs.
 
+This repo is both a module and a bolt project so code can be created and also validated using the pdk and bolt.  For example, ``pdk new class``, ``pdk validate -a``, ``/opt/puppetlabs/bin/bolt plan new --pp``, etc.
+
 ## Pre-requisites
 
 Assumes:
