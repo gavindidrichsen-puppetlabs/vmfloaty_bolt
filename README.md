@@ -77,7 +77,7 @@ Bolt should now be available for use against the vmfloaty VMs.  For example the 
 
 #### Ruby not using the version specified in ``.ruby-version``
 
-If ``bundle install`` (or other ruby commands event ``floaty``) fails with an error something like below with ``...because current Ruby version is = 2.6.10...``, then the command line may not be picking up the ruby version defined by ``rbenv`` in the ``.ruby-version`` file of ``2.7.0``:
+If ``bundle install`` (or other ruby commands even ``floaty``) fails with an error something like below with ``...because current Ruby version is = 2.6.10...``, then the command line may not be picking up the ruby version defined by ``rbenv`` in the ``.ruby-version`` file of ``2.7.0``:
 
 ```bash
 ➜  vmfloaty_bolt git:(development) ✗ bundle install
