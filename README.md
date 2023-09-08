@@ -13,7 +13,7 @@ Assumes:
 * [vmfloaty](https://github.com/puppetlabs/vmfloaty/blob/main/README.md#example-workflow) is installed and configured.
 * [direnv](https://direnv.net/docs/installation.html) is installed
 * [rbenv](https://github.com/rbenv/rbenv) is installed and configured.  Ensure that ``rbenv versions`` includes the version specified in the ``.ruby-version`` file; otherwise install it with ``rbenv install <version>``
-* [jq]() is installed.  This is an optional pre-requisite that formats json output and can be removed from the manual commands below if desired.
+* [jq](https://jqlang.github.io/jq/) is installed.  This is an optional pre-requisite that formats json output and can be removed from the manual commands below if desired.
 * Private key ``~/.ssh/id_rsa-acceptance`` is present and valid, i.e., associated public sshkey is configured on target VMs.
 
 Note also:
