@@ -6,5 +6,6 @@ plan vmfloaty::hello (
   apply_prep($targets)
   apply($targets) {
     notify { 'Hello World!': }
+    include vmfloaty::greeter
   }
 }
