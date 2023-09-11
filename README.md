@@ -130,46 +130,6 @@ Refer to the [peadm usage documentation](https://github.com/puppetlabs/puppetlab
 
 ## Appendix
 
-### Troubleshooting
-
-#### Ruby not using the version specified in ``.ruby-version``
-
-If ``bundle install`` (or other ruby commands even ``floaty``) fails with an error something like below with ``...because current Ruby version is = 2.6.10...``, then the command line may not be picking up the ruby version defined by ``rbenv`` in the ``.ruby-version`` file of ``2.7.0``:
-
-```bash
-➜  vmfloaty_bolt git:(development) ✗ bundle install
-Your RubyGems version (3.0.3.1) has a bug that prevents `required_ruby_version` from working for Bundler. Any scripts that use `gem install bundler` will break as soon as Bundler drops support for your Ruby version. Please upgrade RubyGems to avoid future breakage and silence this warning by running `gem update --system 3.2.3`
-Fetching gem metadata from https://rubygems.org/.........
-Resolving dependencies...
-Could not find compatible versions
-
-Because voxpupuli-puppet-lint-plugins >= 5.0.0 depends on Ruby >= 2.7.0
-  and Gemfile depends on voxpupuli-puppet-lint-plugins ~> 5.0,
-  Ruby >= 2.7.0 is required.
-So, because current Ruby version is = 2.6.10,
-  version solving has failed.
-➜  vmfloaty_bolt git:(development) ✗ 
-```
-
-One solution may be to re-initialize rbenv on the command-line, e.g., ``eval "$(rbenv init - zsh)"``.  For example,
-
-```bash
-➜  vmfloaty_bolt git:(development) ✗ ruby -v
-ruby 2.6.10p210 (2022-04-12 revision 67958) [universal.arm64e-darwin22]
-➜  vmfloaty_bolt git:(development) ✗ eval "$(rbenv init - zsh)"
-➜  vmfloaty_bolt git:(development) ✗ ruby -v
-ruby 2.7.0p0 (2019-12-25 revision 647ee6f091) [x86_64-darwin22]
-➜  vmfloaty_bolt git:(development) ✗ bundle install
-Fetching gem metadata from https://rubygems.org/.........
-Resolving dependencies...
-Fetching rake 13.0.6
-Installing rake 13.0.6
-Fetching public_suffix 5.0.3
-Fetching awesome_print 1.9.2
-...
-...
-```
-
 ### Sample vmfloaty inventory.json and equivalent bolt inventory.yaml
 
 ```bash
