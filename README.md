@@ -46,11 +46,6 @@ floaty get redhat-8-x86_64
 # verify existence of the VMs
 floaty list --active --json | jq '.'
  
-# save the floaty inventory and verify inventory.json contents
-mkdir -p inventory.d/vmfloaty
-floaty list --active --json | jq '.' > inventory.d/vmfloaty/inventory.json 
-cat inventory.d/vmfloaty/inventory.json 
-
 # generate the bolt inventory from the above vmfloaty inventory
 bundle exec ruby generate_inventory.rb 
 
