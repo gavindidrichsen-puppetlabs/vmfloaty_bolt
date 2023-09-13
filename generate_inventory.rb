@@ -5,7 +5,6 @@ require 'yaml'
 class InventoryManager
   def initialize
     @inventory_json = fetch_inventory_json
-    
   end
 
   def process_inventory
@@ -39,7 +38,7 @@ class InventoryManager
   def save_inventory_yaml(parsed_json)
     output = { 'targets' => [] }
 
-    parsed_json.each do |key, value|
+    parsed_json.each do |_key, value|
       target = {
         'name' => value['fqdn'],
         'uri' => value['fqdn'],
