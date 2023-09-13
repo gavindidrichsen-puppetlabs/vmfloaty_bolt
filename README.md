@@ -111,10 +111,10 @@ Refer to the [peadm usage documentation](https://github.com/puppetlabs/puppetlab
 # create a simple "standard" primary only using the peadm, e.g.,
 ➜  peadm_test cat params.json 
 {
-  "primary_host": "<ONE OF THE VMFLOATY HOSTNAMES>",
+  "primary_host": "VMFLOATY_HOSTNAME",
 
   "console_password": "<SOME_PASSWORD>",
-  "dns_alt_names": [ "puppet", "puppet.lab1.puppet.vm", "rangy-tremor.delivery.puppetlabs.net" ],
+  "dns_alt_names": [ "puppet", "puppet.lab1.puppet.vm", "VMFLOATY_HOSTNAME" ],
   "version": "2021.7.4"
 }
 ➜  peadm_test 
