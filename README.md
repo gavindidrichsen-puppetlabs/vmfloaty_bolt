@@ -53,6 +53,8 @@ bundle exec ruby generate_inventory.rb
 cat inventory.yaml
 ```
 
+Re-run the ``bundle exec ruby generate_inventory.rb`` if vmfloaty VM's are either added or removed.  This will ensure the bolt ``inventory.yaml`` is consistent with the actual vmfloaty inventory.
+
 ## Usage
 
 ### Verify that bolt works as expected
