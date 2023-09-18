@@ -8,7 +8,6 @@
 /.vagrant/
 /coverage/
 /bin/
-/doc/
 /Gemfile.lock
 /junit/
 /log/

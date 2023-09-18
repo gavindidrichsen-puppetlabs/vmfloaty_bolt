@@ -59,9 +59,11 @@ cat .ssh_config
 echo "Include ${PWD}/.ssh_config"
 ```
 
-NOTE:  Anytime you either add or remove vmfloaty VMs, then re-run the ``bundle exec ruby generate_inventory.rb``.  This will ensure the bolt ``inventory.yaml`` and ``.ssh_config`` is consistent with the actual vmfloaty inventory.
+NOTE:  Anytime you either add or remove vmfloaty VMs, then re-run the ``bundle exec ruby generate_inventory.rb``.  This will ensure the bolt ``inventory.yaml`` and ``.ssh_config`` are consistent with the actual vmfloaty inventory.
 
 ## Usage
+
+Before proceeding, verify that vscode ``Remote Explorer`` includes the list of new vmfloaty VMs.
 
 ### Verify that bolt works as expected
 
@@ -133,54 +135,55 @@ Refer to the [peadm usage documentation](https://github.com/puppetlabs/puppetlab
 
 ## Appendix
 
-### Sample vmfloaty inventory.json and equivalent bolt inventory.yaml
+### Sample vmfloaty inventory json, bolt inventory.yaml, and ssh config
 
 ```bash
-# show the sample files
-  parse_vmfloaty_list_into_bolt_inventory git:(development) ✗ tree sample
-sample
-├── inventory.d
-│   └── vmfloaty
-│       └── inventory.json
-└── inventory.yaml
-
-3 directories, 2 files
-
-# cat the sample vmfloaty inventory.json
-➜  parse_vmfloaty_list_into_bolt_inventory git:(development) ✗ cat sample/inventory.d/vmfloaty/inventory.json 
+➜  vmfloaty_bolt git:(development) floaty list --active --json | jq '.'
 {
-  "beguiling-pap": {
+  "fresh-tragedy": {
     "template": "redhat-8-x86_64-pooled",
     "lifetime": 12,
-    "running": 4.12,
-    "remaining": 7.88,
-    "start_time": "2023-09-07T15:52:55+00:00",
-    "end_time": "2023-09-08T03:52:55+00:00",
+    "running": 3.02,
+    "remaining": 8.98,
+    "start_time": "2023-09-18T13:53:32+00:00",
+    "end_time": "2023-09-19T01:53:32+00:00",
     "state": "running",
     "ip": "",
-    "fqdn": "beguiling-pap.delivery.puppetlabs.net",
-    "host": "pix-jj27-u22.ops.puppetlabs.net"
+    "fqdn": "fresh-tragedy.delivery.puppetlabs.net",
+    "host": "pix-jj30-u20.ops.puppetlabs.net",
+    "migrated": "true"
   },
-  "wild-poignancy": {
+  "hanoverian-vasa": {
     "template": "redhat-8-x86_64-pooled",
     "lifetime": 12,
-    "running": 1.33,
-    "remaining": 10.67,
-    "start_time": "2023-09-07T18:40:13+00:00",
-    "end_time": "2023-09-08T06:40:13+00:00",
+    "running": 3.02,
+    "remaining": 8.98,
+    "start_time": "2023-09-18T13:53:34+00:00",
+    "end_time": "2023-09-19T01:53:34+00:00",
     "state": "running",
     "ip": "",
-    "fqdn": "wild-poignancy.delivery.puppetlabs.net",
-    "host": "pix-jj29-u19.ops.puppetlabs.net"
+    "fqdn": "hanoverian-vasa.delivery.puppetlabs.net",
+    "host": "pix-jj29-u22.ops.puppetlabs.net",
+    "migrated": "true"
+  },
+  "barbed-might": {
+    "template": "redhat-8-x86_64-pooled",
+    "lifetime": 12,
+    "running": 0.92,
+    "remaining": 11.08,
+    "start_time": "2023-09-18T15:59:19+00:00",
+    "end_time": "2023-09-19T03:59:19+00:00",
+    "state": "running",
+    "ip": "",
+    "fqdn": "barbed-might.delivery.puppetlabs.net",
+    "host": "pix-jj28-u21.ops.puppetlabs.net"
   }
 }
-
-# cat the equivalent bolt inventory.yaml
-➜  parse_vmfloaty_list_into_bolt_inventory git:(development) ✗ cat sample/inventory.yaml 
+➜  vmfloaty_bolt git:(development) cat inventory.yaml 
 ---
 targets:
-- name: beguiling-pap.delivery.puppetlabs.net
-  uri: beguiling-pap.delivery.puppetlabs.net
+- name: hanoverian-vasa.delivery.puppetlabs.net
+  uri: hanoverian-vasa.delivery.puppetlabs.net
   alias: []
   config:
     transport: ssh
@@ -196,8 +199,8 @@ targets:
       private-key: "~/.ssh/id_rsa-acceptance"
       run-as: root
       user: root
-- name: wild-poignancy.delivery.puppetlabs.net
-  uri: wild-poignancy.delivery.puppetlabs.net
+- name: barbed-might.delivery.puppetlabs.net
+  uri: barbed-might.delivery.puppetlabs.net
   alias: []
   config:
     transport: ssh
@@ -213,5 +216,39 @@ targets:
       private-key: "~/.ssh/id_rsa-acceptance"
       run-as: root
       user: root
-➜  parse_vmfloaty_list_into_bolt_inventory git:(development) ✗ 
+- name: fresh-tragedy.delivery.puppetlabs.net
+  uri: fresh-tragedy.delivery.puppetlabs.net
+  alias: []
+  config:
+    transport: ssh
+    ssh:
+      batch-mode: true
+      cleanup: true
+      connect-timeout: 10
+      disconnect-timeout: 5
+      load-config: true
+      login-shell: bash
+      tty: false
+      host-key-check: false
+      private-key: "~/.ssh/id_rsa-acceptance"
+      run-as: root
+      user: root
+➜  vmfloaty_bolt git:(development) cat .ssh_config 
+Host >>>>>vmfloaty_VMs<<<<<
+Host hanoverian-vasa.delivery.puppetlabs.net
+  User root
+  IdentityFile <PRIVATE_KEY>
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+Host barbed-might.delivery.puppetlabs.net
+  User root
+  IdentityFile <PRIVATE_KEY>
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+Host fresh-tragedy.delivery.puppetlabs.net
+  User root
+  IdentityFile <PRIVATE_KEY>
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+➜  vmfloaty_bolt git:(development) 
 ```
