@@ -10,6 +10,7 @@ class InventoryManager
   def process_inventory
     parsed_json = parse_inventory_json
     save_inventory_yaml(parsed_json)
+    generate_ssh_config(parsed_json)
   end
 
   private
@@ -38,6 +39,7 @@ class InventoryManager
   def save_inventory_yaml(parsed_json)
     output = { 'targets' => [] }
 
+    # loop over each vmfloaty VM and create a bolt ssh target
     parsed_json.each do |_key, value|
       target = {
         'name' => value['fqdn'],
@@ -69,6 +71,29 @@ class InventoryManager
       puts "Inventory.yaml generated successfully at #{output_file_path}"
     rescue StandardError => e
       puts "Error writing YAML file: #{e.message}"
+      exit(1)
+    end
+  end
+
+  def generate_ssh_config(parsed_json)
+    ssh_config = "Host >>>>>vmfloaty_VMs<<<<<\n"
+
+    # loop over each vmfloaty VM and create an ssh config entry
+    parsed_json.each do |_key, value|
+      fqdn = value['fqdn']
+      ssh_config += "Host #{fqdn}\n"
+      ssh_config += "  User root\n"
+      ssh_config += "  IdentityFile <PRIVATE_KEY>\n"
+      ssh_config += "  StrictHostKeyChecking no\n"
+      ssh_config += "  UserKnownHostsFile /dev/null\n"
+    end
+
+    output_file_path = './.ssh_config'
+    begin
+      File.open(output_file_path, 'w') { |file| file.write(ssh_config) }
+      puts ".ssh_config generated successfully at #{output_file_path}"
+    rescue StandardError => e
+      puts "Error writing SSH config file: #{e.message}"
       exit(1)
     end
   end
