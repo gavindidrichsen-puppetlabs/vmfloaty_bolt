@@ -51,9 +51,15 @@ bundle exec ruby generate_inventory.rb
 
 # verify contents of bolt inventory: it should be a valid bolt inventory file
 cat inventory.yaml
+
+# verify contents of the ``.ssh_config``: it should contain valid ssh config for the VMs
+cat .ssh_config
+
+# copy the output from below and add it to your ~/.ssh/config (only do this once)
+echo "Include ${PWD}/.ssh_config"
 ```
 
-Re-run the ``bundle exec ruby generate_inventory.rb`` if vmfloaty VM's are either added or removed.  This will ensure the bolt ``inventory.yaml`` is consistent with the actual vmfloaty inventory.
+NOTE:  Anytime you either add or remove vmfloaty VMs, then re-run the ``bundle exec ruby generate_inventory.rb``.  This will ensure the bolt ``inventory.yaml`` and ``.ssh_config`` is consistent with the actual vmfloaty inventory.
 
 ## Usage
 

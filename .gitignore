@@ -33,3 +33,4 @@ inventory.ssh.yaml
 .modules/
 .rerun.json
 .resource_types/
+.ssh_config
