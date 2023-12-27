@@ -17,7 +17,7 @@ class InventoryManager
 
   def fetch_inventory_json
     # get json list of active vmfloaty VMs
-    output = `floaty list --active --json`.strip
+    output = `floaty list --active --service vmpooler --json`.strip
 
     # abort if empty string returned, i.e., no vmfloaty VMs
     raise 'Error fetching inventory json: Do you have any vmfloaty VMs?' if output.empty?
@@ -82,10 +82,16 @@ class InventoryManager
     parsed_json.each do |_key, value|
       fqdn = value['fqdn']
       ssh_config += "Host #{fqdn}\n"
-      ssh_config += "  User root\n"
-      ssh_config += "  IdentityFile <PRIVATE_KEY>\n"
-      ssh_config += "  StrictHostKeyChecking no\n"
-      ssh_config += "  UserKnownHostsFile /dev/null\n"
+
+      # if the VM domain name matches then use perforce smallstep ssh config
+      if fqdn.include?('vmpooler-prod.puppet.net')
+        ssh_config += "  Include '/Users/gavin.didrichsen/.step/ssh/includes'\n"
+      else
+        ssh_config += "  User root\n"
+        ssh_config += "  IdentityFile ~/.ssh/id_rsa-acceptance\n"
+        ssh_config += "  StrictHostKeyChecking no\n"
+        ssh_config += "  UserKnownHostsFile /dev/null\n"
+      end
     end
 
     output_file_path = './.ssh_config'

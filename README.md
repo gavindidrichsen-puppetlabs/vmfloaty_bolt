@@ -40,11 +40,11 @@ direnv allow # this only needs to be done once; thereafter, the environment will
 which floaty
 
 # generate a couple floaty VMs
-floaty get redhat-8-x86_64
-floaty get redhat-8-x86_64
+floaty get redhat-8-x86_64 --service vmpooler
+floaty get redhat-8-x86_64 --service vmpooler
 
 # verify existence of the VMs
-floaty list --active --json | jq '.'
+floaty list --active --json --service vmpooler | jq '.'
  
 # generate the bolt inventory from the above vmfloaty inventory
 bundle exec ruby generate_inventory.rb 
@@ -138,7 +138,7 @@ Refer to the [peadm usage documentation](https://github.com/puppetlabs/puppetlab
 ### Sample vmfloaty inventory json, bolt inventory.yaml, and ssh config
 
 ```bash
-➜  vmfloaty_bolt git:(development) floaty list --active --json | jq '.'
+➜  vmfloaty_bolt git:(development) floaty list --active --json --service vmpooler | jq '.'
 {
   "fresh-tragedy": {
     "template": "redhat-8-x86_64-pooled",
