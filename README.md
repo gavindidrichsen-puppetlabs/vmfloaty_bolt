@@ -12,7 +12,7 @@ This repo is both a module and a bolt project so code can be created and also va
 
 * [ADR-0001](doc/adr/0001-automatically-generate-an-ssh-config-file.md) - Automatically generate an ssh config file
 * [ADR-0002](doc/adr/0002-use-native-ssh-rather-than-private-keys.md) - Use native_ssh rather than private keys
-* [ADR-0003](doc/adr/0003-use-short-hostname-for-bolt-inventory-listing.md) - use short hostname for bolt inventory listing
+* [ADR-0003](doc/adr/0003-use-short-hostname-for-bolt-inventory-listing.md) - Use short hostname for bolt inventory listing
 
 <!-- adrlogstop -->
 

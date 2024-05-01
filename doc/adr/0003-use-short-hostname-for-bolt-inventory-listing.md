@@ -1,4 +1,4 @@
-# 3. use short hostname for bolt inventory listing
+# 3. Use short hostname for bolt inventory listing
 
 Date: 2024-05-01
 
