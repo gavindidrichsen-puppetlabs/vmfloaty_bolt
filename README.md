@@ -6,6 +6,16 @@ This project illustrates how to generate a bolt inventory from a list of vmfloat
 
 This repo is both a module and a bolt project so code can be created and also validated using the pdk and bolt.  For example, ``pdk new class``, ``pdk validate -a``, ``/opt/puppetlabs/bin/bolt plan new --pp``, etc.
 
+## Design Decisions
+
+<!-- adrlog -->
+
+* [ADR-0001](doc/adr/0001-automatically-generate-an-ssh-config-file.md) - Automatically generate an ssh config file
+* [ADR-0002](doc/adr/0002-use-native-ssh-rather-than-private-keys.md) - Use native_ssh rather than private keys
+* [ADR-0003](doc/adr/0003-use-short-hostname-for-bolt-inventory-listing.md) - use short hostname for bolt inventory listing
+
+<!-- adrlogstop -->
+
 ## Pre-requisites
 
 Assumes:
