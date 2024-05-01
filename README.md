@@ -27,10 +27,6 @@ Assumes the following utilities are installed:
 
 Also assumes that the user has configured his own `~/.ssh/config` in such a way that he can connect over ssh to all the various vmfloaty VMs.  In other words, bolt uses "native-ssh" to connect to the hosts in its `inventory.yaml`.  For more information on why this is the case see [ADR-0002](doc/adr/0002-use-native-ssh-rather-than-private-keys.md).
 
-Note also:
-
-* Because of some dependency conflicts, ruby version for this should be kept at ``2.7.0`` until these conflicts are resolved.  The ``.ruby-version`` ensures the correct ruby version is used.
-
 ## Setup
 
 The following must be performed before using bolt against the vmfloaty VMs:
