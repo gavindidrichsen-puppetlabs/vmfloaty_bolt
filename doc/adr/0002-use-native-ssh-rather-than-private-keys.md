@@ -8,9 +8,9 @@ Accepted
 
 ## Context
 
-Perforce VM estate are moving toward a ssh-authorization managed service called smallstep.  In other words, `~/.ssh/id_rsa-acceptance` will no longer connect to servers managed by smallstep.  Further, we cannot simply replace the old key with some new smallstep variant.  The process of authentication is more complicated using proxy commands, triggering browser logins, etc.  Once a users `~/.ssh/config` is configured for smallstep, then I can easily connect to these new servers on the command-line and vscode.  For more information about smallstep see the [References section](#references).
+Perforce is moving its VM estate from simple public-key authorization to an ssh-authorization managed service called [smallstep](https://smallstep.com/sso-ssh/).  The simple public key authorization is where (1) a common `~/.ssh/id_rsa-acceptance` private key is shared amongst all engineers; and (2) servers contain this key's public footprint in their `authorized_hosts` file.  This approach will no longer work with servers managed by smallstep.  Additionally, the smallstep approach does not mean that can replace the old key with some new smallstep variant.  In fact, the smallstep authentication process is more complicated using proxy commands, triggering browser logins, etc.  Once a users `~/.ssh/config` is configured for smallstep, then users can easily ssh to managed servers on the command-line and vscode.  For more information about smallstep see the [References section](#references).
 
-However, my bolt `inventory.yml` stopped connecting to these new servers.  Fortunately, bolt contains a configuration parameter called [native-ssh](https://www.puppet.com/docs/bolt/latest/experimental_features#native-ssh-transport) which will use the "native" ssh configuration present on the user's system.
+Although, my command-line ssh connected fine to the new smallstep server, my bolt `inventory.yaml` stopped working.  Fortunately, bolt contains a configuration parameter called [native-ssh](https://www.puppet.com/docs/bolt/latest/experimental_features#native-ssh-transport) which will use the "native" ssh configuration present on the user's system and this allows my bolt to connect to the new managed servers.
 
 ## Decision
 
