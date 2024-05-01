@@ -42,7 +42,7 @@ class InventoryManager
     # loop over each vmfloaty VM and create a bolt ssh target
     parsed_json.each do |_key, value|
       target = {
-        'name' => value['fqdn'],
+        'name' => value['fqdn'].split('.').first,
         'uri' => value['fqdn'],
         'alias' => [],
         'config' => {
