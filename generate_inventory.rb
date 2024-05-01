@@ -48,15 +48,11 @@ class InventoryManager
         'config' => {
           'transport' => 'ssh',
           'ssh' => {
-            'batch-mode' => true,
-            'cleanup' => true,
-            'connect-timeout' => 10,
-            'disconnect-timeout' => 5,
+            'native-ssh' => true,
             'load-config' => true,
             'login-shell' => 'bash',
             'tty' => false,
             'host-key-check' => false,
-            'private-key' => '~/.ssh/id_rsa-acceptance',
             'run-as' => 'root',
             'user' => 'root'
           }
