@@ -18,13 +18,14 @@ This repo is both a module and a bolt project so code can be created and also va
 
 ## Pre-requisites
 
-Assumes:
+Assumes the following utilities are installed:
 
 * [vmfloaty](https://github.com/puppetlabs/vmfloaty/blob/main/README.md#example-workflow) is installed and configured.
 * [direnv](https://direnv.net/docs/installation.html) is installed
 * [rbenv](https://github.com/rbenv/rbenv) is installed and configured.  Ensure that ``rbenv versions`` includes the version specified in the ``.ruby-version`` file; otherwise install it with ``rbenv install <version>``
 * [jq](https://jqlang.github.io/jq/) is installed.  This is an optional pre-requisite that formats json output and can be removed from the manual commands below if desired.
-* Private key ``~/.ssh/id_rsa-acceptance`` is present and valid, i.e., associated public sshkey is configured on target VMs.
+
+Also assumes that the user has configured his own `~/.ssh/config` in such a way that he can connect over ssh to all the various vmfloaty VMs.  In other words, bolt uses "native-ssh" to connect to the hosts in its `inventory.yaml`.  For more information on why this is the case see [ADR-0002](doc/adr/0002-use-native-ssh-rather-than-private-keys.md).
 
 Note also:
 
