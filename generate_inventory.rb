@@ -37,7 +37,21 @@ class InventoryManager
   end
 
   def save_inventory_yaml(parsed_json)
-    output = { 'targets' => [] }
+    output = {
+      'config' => {
+        'transport' => 'ssh',
+        'ssh' => {
+          'native-ssh' => true,
+          'load-config' => true,
+          'login-shell' => 'bash',
+          'tty' => false,
+          'host-key-check' => false,
+          'run-as' => 'root',
+          'user' => 'root'
+        }
+      },
+      'targets' => []
+    }
 
     # loop over each vmfloaty VM and create a bolt ssh target
     parsed_json.each do |_key, value|
@@ -46,18 +60,10 @@ class InventoryManager
         'uri' => value['fqdn'],
         'alias' => [],
         'config' => {
-          'transport' => 'ssh',
-          'ssh' => {
-            'native-ssh' => true,
-            'load-config' => true,
-            'login-shell' => 'bash',
-            'tty' => false,
-            'host-key-check' => false,
-            'run-as' => 'root',
-            'user' => 'root'
-          }
+          'transport' => 'ssh'
         }
       }
+
       output['targets'] << target
     end
 
